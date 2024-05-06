@@ -46,3 +46,20 @@ In conclusion, the EKS cluster and worker nodes are located in tier 2 in private
 * The database instance is located in a separate private subnet. This approach increases security. The database is not exposed to the public internet and is less vulnerable by potential threats. Although the database is accessible via bastion host, then some access management is needed for sure to ensure that only authorized users are accessing.
 
 * Bastion host is a secure way of accessing resources in private subnets. It is more secure than to provide a direct access to EKS cluster or database. With correct access management it is a good way of managing the resources.
+
+## CI/CD pipeline proposals
+
+There are several options for CI/CD pipeline with AWS. It is possible to use CodePipeline or similar AWS tools. One solution that I would consider is making the pipeline with Jenkins.
+
+That would mean that we should deploy a separate EC2 instance and make it as a Jenkins server, the prerequisites on the server would be AWS CLI, Docker, Kubernetes, Terraform etc.
+
+A possible pipeline could consist of following stages:
+* Build the app
+    * Pull the latest code from the repo, build the application containers
+* Run unit tests (if existing)
+* Static code analysis with SonarQube or similar tool
+* Applying the Terraform configuration (init, plan, apply)
+* Update the Docker image in the registry (Amazon ECR)
+* Deployment with Kubernetes manifest files
+
+Of course, there can be different ways and options, but the described above is just one possible solution.
