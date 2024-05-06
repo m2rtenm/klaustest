@@ -54,3 +54,21 @@ variable "bastion_subnet_cidr" {
   type = string
   default = "10.0.7.0/24"
 }
+
+variable "eks_cluster_name" {
+  type = string
+  default = "EKS-Klaus"
+}
+
+variable "bastion_ami" {
+  type = string
+  default = "ami-011e54f70c1c91e17"
+  description = "Ubuntu 22.04 LTS AMI"
+}
+
+variable "db_username" {
+  type = string
+  default = "awsklaus"
+}
+
+variable "db_password" {}
