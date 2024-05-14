@@ -3,11 +3,16 @@ kind: Ingress
 metadata:
   name: ingress-lb
   namespace: three-tier
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
   labels:
     name: ingress-lb
 spec:
+  ingressClassName: alb
   rules:
-  - host: example.com
+  - host: 
     http:
       paths:
       - pathType: Prefix
@@ -17,4 +22,11 @@ spec:
             name: frontend
             port: 
               number: 80
+      - pathType: Prefix
+        path: "/backend"
+        backend:
+          service:
+            name: backend
+            port:
+              number: 8080
 

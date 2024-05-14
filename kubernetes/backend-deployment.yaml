@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: backend
-        image: public.ecr.aws/j5h3p9y6/3-tier-backend:latest
+        image: public.ecr.aws/l0l7e4u1/3-tier-backend:latest
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "500m"
         ports:
-        - containerPort: 3500
+        - containerPort: 8080
