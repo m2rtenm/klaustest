@@ -39,7 +39,7 @@ resource "helm_release" "lb" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
-  namespace  = "kube-system"
+  namespace  = "three-tier"
   depends_on = [
     kubernetes_service_account.service-account
   ]
