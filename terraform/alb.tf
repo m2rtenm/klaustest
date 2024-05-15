@@ -46,7 +46,7 @@ resource "helm_release" "lb" {
 
   set {
     name  = "region"
-    value = "eu-west-2"
+    value = var.region
   }
 
   set {
