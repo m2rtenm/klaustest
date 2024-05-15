@@ -6,17 +6,10 @@ data "http" "url" {
   }
 }
 
-resource "aws_iam_policy" "alb_iam_policy" {
-  name = "${var.prefix}-AWS-ALB-Ingress-Policy"
-  path = "/"
-  description = "Load Balancer Controller policy"
-  policy = data.http.url.request_body
-}
-
 module "lb_role" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
 
-  role_name = "${var.env_name}_eks_lb"
+  role_name = "${var.prefix}_eks_lb"
   attach_load_balancer_controller_policy = true
 
   oidc_providers = {
